@@ -5,7 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\User;
 use App\Entity\Conseil;
 use Faker;
-use Doctrine\Bundle\FixturesBundle\Fixture; 
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -25,7 +25,6 @@ class AppFixtures extends Fixture
 
         $users = [];
 
-        // 1️⃣ Créer les utilisateurs
         for ($i = 0; $i < 5; $i++) {
             $user = new User();
             $user->setEmail($faker->email);
@@ -35,10 +34,9 @@ class AppFixtures extends Fixture
             $user->setCreatedAt(new \DateTimeImmutable());
 
             $manager->persist($user);
-            $users[] = $user; // stocker pour les conseils
+            $users[] = $user;
         }
 
-        // 2️⃣ Créer les conseils et les lier aux utilisateurs
         for ($i = 0; $i < 5; $i++) {
             $conseil = new Conseil();
             $conseil->setText($faker->sentence());
@@ -47,13 +45,11 @@ class AppFixtures extends Fixture
             $conseil->setCreatedAt(new \DateTimeImmutable());
             $conseil->setUpdatedAt(new \DateTimeImmutable());
 
-            // Assigner un auteur au hasard
             $conseil->setAuthor($users[array_rand($users)]);
 
             $manager->persist($conseil);
         }
 
-        // 3️⃣ Tout sauvegarder en une fois
         $manager->flush();
     }
 }

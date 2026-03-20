@@ -51,4 +51,12 @@ class MeteoCacheRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function deleteAll(): void
+    {
+        $this->createQueryBuilder('m')
+            ->delete()
+            ->getQuery()
+            ->execute();
+    }
 }
