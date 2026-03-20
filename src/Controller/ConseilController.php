@@ -45,6 +45,11 @@ final class ConseilController extends AbstractController
     #[Route('/api/conseil/{month}', name: 'conseil_by_month', methods: ['GET'])]
     public function getByMonth(string $month, ConseilRepository $conseilRepository): JsonResponse
     {
+
+        if (!is_numeric($month) || (int) $month < 1 || (int) $month > 12) {
+            return $this->json(['code' => 400, 'message' => 'Mois invalide : ' . $month . '. Le mois doit avoir une valeur entre 01 et 12'], 400);
+        }
+        
         $conseils = $conseilRepository->findAll();
 
         $filtered_conseils = array_filter($conseils, function ($conseil) use ($month) {
