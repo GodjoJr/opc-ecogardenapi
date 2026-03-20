@@ -40,4 +40,15 @@ class MeteoCacheRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findOneByCity(string $city, string $countryCode = 'fr'): ?MeteoCache
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.city = :city')
+            ->andWhere('m.countryCode = :country')
+            ->setParameter('city', strtolower($city))
+            ->setParameter('country', $countryCode)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

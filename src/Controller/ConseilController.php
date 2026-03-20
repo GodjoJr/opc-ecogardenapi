@@ -11,8 +11,8 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 final class ConseilController extends AbstractController
 {
 
-    #[Route('/conseil/', name: 'conseil_this_month', methods: ['GET'])]
-    #[IsGranted('ROLE_USER', message: 'Vous devez être connecté pour accéder à cette ressource.')]
+    #[IsGranted('ROLE_USER')]
+    #[Route('/api/conseil/', name: 'conseil_this_month', methods: ['GET'])]
     public function getThisMonth(ConseilRepository $conseilRepository): JsonResponse
     {
         $date = new \DateTime();
@@ -38,8 +38,8 @@ final class ConseilController extends AbstractController
         return $this->json($data);
     }
 
-    #[IsGranted('ROLE_USER', message: 'Vous devez être connecté pour accéder à cette ressource.')]
-    #[Route('/conseil/{month}', name: 'conseil_by_month', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
+    #[Route('/api/conseil/{month}', name: 'conseil_by_month', methods: ['GET'])]
     public function getByMonth(string $month, ConseilRepository $conseilRepository): JsonResponse
     {
         $conseils = $conseilRepository->findAll();

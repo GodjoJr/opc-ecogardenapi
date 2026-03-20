@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class UserController extends AbstractController
 {
-    #[Route('/user', name: 'user_create', methods: ['POST'])]
+    #[Route('/api/user', name: 'user_create', methods: ['POST'])]
     public function createUser(
         Request $request,
         EntityManagerInterface $entityManager,
@@ -44,6 +44,7 @@ final class UserController extends AbstractController
                 $errorMessages[$error->getPropertyPath()] = $error->getMessage();
             }
             return $this->json([
+                'code' => 400,
                 'errors' => $errorMessages
             ], 400);
         }
