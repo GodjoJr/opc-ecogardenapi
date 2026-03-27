@@ -98,8 +98,8 @@ Authorization: Bearer <token>
 
 | Méthode | Route | Description | Auth requise |
 |---|---|---|---|
-| `GET` | `/conseil/` | Récupérer les conseils du mois en cours | Oui |
-| `GET` | `/conseil/{month}` | Récupérer les conseils d'un mois précis (1–12) | Oui |
+| `GET` | `/conseil/` | Récupérer les conseils du mois en cours | Oui (ROLE_USER) |
+| `GET` | `/conseil/{month}` | Récupérer les conseils d'un mois précis (1–12) | Oui (ROLE_USER) |
 | `POST` | `/conseil/` | Ajouter un conseil | Oui (ROLE_ADMIN) |
 | `PUT` | `/conseil/{id}` | Modifier un conseil | Oui (ROLE_ADMIN) |
 | `DELETE` | `/conseil/{id}` | Supprimer un conseil | Oui (ROLE_ADMIN) |
@@ -108,8 +108,8 @@ Authorization: Bearer <token>
 
 | Méthode | Route | Description | Auth requise |
 |---|---|---|---|
-| `GET` | `/weather/` | Météo de la ville de l'utilisateur connecté | Oui |
-| `GET` | `/weather/{city}` | Météo d'une ville spécifique | Non |
+| `GET` | `/weather/` | Météo de la ville de l'utilisateur connecté | Oui (ROLE_USER) |
+| `GET` | `/weather/{city}` | Météo d'une ville spécifique | Non (ROLE_USER) |
 | `DELETE` | `/weather/` | Vider le cache météo | Oui (ROLE_ADMIN) |
 
 ---

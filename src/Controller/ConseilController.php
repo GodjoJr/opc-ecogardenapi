@@ -41,7 +41,7 @@ final class ConseilController extends AbstractController
         return $this->json($data);
     }
 
-    #[IsGranted('ROLE_ADMIN')]
+    #[IsGranted('ROLE_USER')]
     #[Route('/api/conseil/{month}', name: 'conseil_by_month', methods: ['GET'])]
     public function getByMonth(string $month, ConseilRepository $conseilRepository): JsonResponse
     {

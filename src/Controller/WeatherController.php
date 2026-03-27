@@ -14,6 +14,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class WeatherController extends AbstractController
 {
+    #[IsGranted('ROLE_USER')]
     #[Route('/api/weather', name: 'app_weather_user', methods: ['GET'])]
     public function getWeatherForCurrentUser(HttpClientInterface $client, MeteoCacheRepository $meteoCacheRepository, EntityManagerInterface $entityManager): JsonResponse
     {
@@ -81,6 +82,7 @@ final class WeatherController extends AbstractController
         return $this->json($data);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/api/weather/{city}', name: 'app_weather_city', methods: ['GET'])]
     public function getWeatherFromCity(string $city, Request $request, HttpClientInterface $client, MeteoCacheRepository $meteoCacheRepository, EntityManagerInterface $entityManager): JsonResponse
     {
