@@ -25,16 +25,37 @@ class AppFixtures extends Fixture
 
         $users = [];
 
-        for ($i = 0; $i < 5; $i++) {
-            $user = new User();
-            $user->setEmail($faker->email);
-            $user->setCity($faker->city);
-            $user->setZipcode($faker->postcode);
-            $user->setPassword($this->passwordHasher->hashPassword($user, 'password'));
-            $user->setCreatedAt(new \DateTimeImmutable());
+        $admin = new User();
+        $admin->setEmail('admin@ecogarden.com');
+        $admin->setCity('Paris');
+        $admin->setZipcode('75000');
+        $admin->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
+        $admin->setPassword($this->passwordHasher->hashPassword($admin, 'password'));
+        $admin->setCreatedAt(new \DateTimeImmutable());
+        $manager->persist($admin);
+        $users[] = $admin;
 
-            $manager->persist($user);
-            $users[] = $user;
+        $user = new User();
+        $user->setEmail('user@ecogarden.com');
+        $user->setCity('Lyon');
+        $user->setZipcode('69000');
+        $user->setRoles(['ROLE_USER']);
+        $user->setPassword($this->passwordHasher->hashPassword($user, 'password'));
+        $user->setCreatedAt(new \DateTimeImmutable());
+        $manager->persist($user);
+        $users[] = $user;
+
+        for ($i = 0; $i < 5; $i++) {
+            $randomUser = new User();
+            $randomUser->setEmail($faker->email);
+            $randomUser->setCity($faker->city);
+            $randomUser->setZipcode($faker->postcode);
+            $randomUser->setRoles(['ROLE_USER']);
+            $randomUser->setPassword($this->passwordHasher->hashPassword($randomUser, 'password'));
+            $randomUser->setCreatedAt(new \DateTimeImmutable());
+
+            $manager->persist($randomUser);
+            $users[] = $randomUser;
         }
 
         for ($i = 0; $i < 5; $i++) {
@@ -44,7 +65,6 @@ class AppFixtures extends Fixture
             $conseil->setMonth(array_slice($months, 0, 3));
             $conseil->setCreatedAt(new \DateTimeImmutable());
             $conseil->setUpdatedAt(new \DateTimeImmutable());
-
             $conseil->setAuthor($users[array_rand($users)]);
 
             $manager->persist($conseil);
