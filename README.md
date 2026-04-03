@@ -16,7 +16,7 @@ API REST développée avec Symfony permettant la gestion des utilisateurs, la co
 ## Installation
 
 ```bash
-git clone https://github.com/ton-pseudo/ecogarden-api.git
+git clone https://github.com/GodjoJr/ecogarden-api.git
 cd ecogarden-api
 
 composer install
@@ -109,7 +109,7 @@ Authorization: Bearer <token>
 | Méthode | Route | Description | Auth requise |
 |---|---|---|---|
 | `GET` | `/weather/` | Météo de la ville de l'utilisateur connecté | Oui (ROLE_USER) |
-| `GET` | `/weather/{city}` | Météo d'une ville spécifique | Non (ROLE_USER) |
+| `GET` | `/weather/{city}` | Météo d'une ville spécifique | Oui (ROLE_USER) |
 | `DELETE` | `/weather/` | Vider le cache météo | Oui (ROLE_ADMIN) |
 
 ---
